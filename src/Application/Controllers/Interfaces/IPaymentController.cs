@@ -10,7 +10,7 @@ public interface IPaymentController
     //Task<OrderPresenter> GetByIdAsync(string id, CancellationToken cancellationToken);
     //Task<OrderPaginatedPresenter> GetAllAsync(OrderFilter filter, CancellationToken cancellationToken);
     //Task<OrderPaginatedPresenter> GetActiveAsync(OrderFilter filter, CancellationToken cancellationToken);
-    Task<CheckoutPresenter> CheckoutAsync(string id, CheckoutRequest request, CancellationToken cancellationToken);
+    Task<CheckoutPresenter> CheckoutAsync(CheckoutRequest request, CancellationToken cancellationToken);
     Task ConfirmPaymentAsync(string id, CancellationToken cancellationToken);
     Task ProcessPaymentAsync(PaymentWebhook request, CancellationToken cancellationToken);
     //Task<OrderPresenter> UpdateStatusAsync(string id, UpdateStatusRequest updateStatusRequest, CancellationToken cancellationToken);

@@ -15,13 +15,12 @@ public class Payment : ControllerBase
         _orderController = orderController;
     }
 
-    [HttpPost("{id:length(24)}/checkout")]
+    [HttpPost("checkout")]
     public async Task<IActionResult> CheckoutAsync(
         [FromBody] CheckoutRequest checkoutRequest,
-        string id,
         CancellationToken cancellationToken)
     {
-        var presenter = await _orderController.CheckoutAsync(id, checkoutRequest, cancellationToken);
+        var presenter = await _orderController.CheckoutAsync(checkoutRequest, cancellationToken);
 
         return Ok(presenter.ViewModel);
     }

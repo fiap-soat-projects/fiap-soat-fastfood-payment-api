@@ -18,4 +18,11 @@ public record CheckoutRequest
             _paymentType = paymentType;
         }
     }
+
+    public required string OrderId { get; set; }
+    public string? CustomerId { get; set; }
+    public string? CustomerName { get; set; }
+    public string? CustomerEmail { get; set; }
+    public required decimal TotalPrice { get; set; }
+
 }

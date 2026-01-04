@@ -4,12 +4,12 @@ using Adapter.Controllers.Interfaces;
 using Adapter.Presenters;
 using Business.Entities;
 using Business.Entities.Enums;
-using Business.Exceptions;
+using Business.Gateways.Clients.DTOs;
 using Business.UseCases.Exceptions;
 using Business.UseCases.Interfaces;
-using System.Data;
 
 namespace Adapter.Controllers;
+
 internal class PaymentController : IPaymentController
 {
     //private readonly IOrderUseCase _orderUseCase;
@@ -105,15 +105,26 @@ internal class PaymentController : IPaymentController
     //    await _orderUseCase.DeleteAsync(id, cancellationToken);
     //}
 
-    public async Task<CheckoutPresenter> CheckoutAsync(string id, CheckoutRequest request, CancellationToken cancellationToken)
+    public async Task<CheckoutPresenter> CheckoutAsync(CheckoutRequest request, CancellationToken cancellationToken)
     {
-        Order order = null;//await _orderUseCase.GetByIdAsync(id, cancellationToken);
 
         PaymentMethodNotSupportedException.ThrowIfPaymentMethodIsNotSupported(request.PaymentType!);
-
         _ = Enum.TryParse(request.PaymentType, out PaymentMethod paymentMethod);
 
-        var orderPaymentCheckout = await _paymentUseCase.CheckoutAsync(order!, paymentMethod, cancellationToken);
+        var customerId = !string.IsNullOrWhiteSpace(request.CustomerId) ? request.CustomerId : "NoUser";
+        var customerName = !string.IsNullOrWhiteSpace(request.CustomerName) ? request.CustomerName : "fakeUserName";
+        var customerEmail = !string.IsNullOrWhiteSpace(request.CustomerEmail) ? request.CustomerEmail : "fakeemail@fake.com";
+
+        var checkoutInput = new CheckoutInput
+        (
+            customerId!,
+            customerName!,
+            customerEmail!,
+            request.OrderId!,
+            request.TotalPrice
+        );
+
+        var orderPaymentCheckout = await _paymentUseCase.CheckoutAsync(checkoutInput, paymentMethod, cancellationToken);
 
         return new CheckoutPresenter(orderPaymentCheckout);
     }

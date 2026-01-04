@@ -6,24 +6,22 @@ using Business.Gateways.Repositories.Interfaces;
 using Business.UseCases.Interfaces;
 
 namespace Business.UseCases;
+
 internal class TransactionUseCase : ITransactionUseCase
 {
     private readonly IPixClient _pixClient;
-    //private readonly ICustomerUseCase _customerUseCase;
     private readonly IOrderRepository _orderRepository;
 
-    public TransactionUseCase(IPixClient pixClient, 
-        //ICustomerUseCase customerUseCase, 
+    public TransactionUseCase(IPixClient pixClient,
         IOrderRepository orderRepository)
     {
         _pixClient = pixClient;
-        //_customerUseCase = customerUseCase;
         _orderRepository = orderRepository;
     }
 
-    public async Task<PaymentCheckout> CheckoutAsync(Order order, PaymentMethod method, CancellationToken cancellationToken)
+    public async Task<PaymentCheckout> CheckoutAsync(CheckoutInput checkoutInput, PaymentMethod method, CancellationToken cancellationToken)
     {
-        var paymentCheckout = await ExecuteCheckoutAsync(order, method, cancellationToken);
+        var paymentCheckout = await ExecuteCheckoutAsync(checkoutInput, method, cancellationToken);
 
         var payment = new Payment
         {
@@ -32,21 +30,14 @@ internal class TransactionUseCase : ITransactionUseCase
             Status = PaymentStatus.Pending
         };
 
-        await _orderRepository.UpdatePaymentAsync(order.Id, OrderStatus.Pending, payment, cancellationToken);
+        await _orderRepository.UpdatePaymentAsync(checkoutInput.OrderId, OrderStatus.Pending, payment, cancellationToken);
 
         return paymentCheckout;
     }
 
-    private async Task<PaymentCheckout> ExecuteCheckoutAsync(Order order, PaymentMethod method, CancellationToken cancellationToken)
+    private async Task<PaymentCheckout> ExecuteCheckoutAsync(CheckoutInput checkoutInput, PaymentMethod method, CancellationToken cancellationToken)
     {
-        if (!string.IsNullOrWhiteSpace(order?.CustomerId))
-        {
-            return await ExecuteCustomerCheckoutAsync(order!, method, cancellationToken);
-        }
-
-        var orderPaymentCheckout = await ExecuteAnonymousCheckoutAsync(order!, method, cancellationToken);
-
-        return orderPaymentCheckout;
+        return await ExecuteOrderCheckoutAsync(checkoutInput!, method, cancellationToken);
     }
 
     public async Task ConfirmPaymentAsync(string id, CancellationToken cancellationToken)
@@ -60,7 +51,7 @@ internal class TransactionUseCase : ITransactionUseCase
     {
         var orderStatus = GetOrderStatusByPayment(payment.Status);
 
-        await _orderRepository.UpdatePaymentAsync(orderId, orderStatus,payment, cancellationToken);
+        await _orderRepository.UpdatePaymentAsync(orderId, orderStatus, payment, cancellationToken);
     }
     private static OrderStatus GetOrderStatusByPayment(PaymentStatus payment)
     {
@@ -74,37 +65,9 @@ internal class TransactionUseCase : ITransactionUseCase
 
     }
 
-    private async Task<PaymentCheckout> ExecuteAnonymousCheckoutAsync(Order order, PaymentMethod paymentMethod, CancellationToken cancellationToken)
+    private async Task<PaymentCheckout> ExecuteOrderCheckoutAsync(CheckoutInput checkoutInput, PaymentMethod paymentMethod, CancellationToken cancellationToken)
     {
-        var checkoutInput = new CheckoutInput
-        (
-            "NoUser",
-            "fakeUserName",
-            "fakeemail@fake.com",
-            order.Id!,
-            order.TotalPrice
-        );
-
         var orderPaymentCheckout = await _pixClient.CreatePaymentAsync(checkoutInput!, paymentMethod, cancellationToken);
-
-        return orderPaymentCheckout;
-    }
-
-    private async Task<PaymentCheckout> ExecuteCustomerCheckoutAsync(Order order, PaymentMethod paymentMethod, CancellationToken cancellationToken)
-    {
-        Customer customer = null; //await _customerUseCase.GetByIdAsync(order!.CustomerId!, cancellationToken);
-
-        var checkoutInput = new CheckoutInput
-        (
-            customer.Id!,
-            order.CustomerName!,
-            customer.Email!,
-            order.Id!,
-            order.TotalPrice
-        );
-
-        var orderPaymentCheckout = await _pixClient.CreatePaymentAsync(checkoutInput!, paymentMethod, cancellationToken);
-
         return orderPaymentCheckout;
     }
 }
