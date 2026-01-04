@@ -4,7 +4,7 @@ using Adapter.Presenters;
 
 namespace Adapter.Controllers.Interfaces;
 
-public interface IOrderController
+public interface IPaymentController
 {
     //Task<string> CreateAsync(CreateRequest request, CancellationToken cancellationToken);
     //Task<OrderPresenter> GetByIdAsync(string id, CancellationToken cancellationToken);

@@ -10,20 +10,20 @@ using Business.UseCases.Interfaces;
 using System.Data;
 
 namespace Adapter.Controllers;
-internal class OrderController : IOrderController
+internal class PaymentController : IPaymentController
 {
-    private readonly IOrderUseCase _orderUseCase;
+    //private readonly IOrderUseCase _orderUseCase;
     //private readonly IMenuItemUseCase _menuItemUseCase;
     //private readonly IInventoryUseCase _inventoryUseCase;
     private readonly ITransactionUseCase _paymentUseCase;
 
-    public OrderController(
-        IOrderUseCase orderUseCase,
+    public PaymentController(
+        //IOrderUseCase orderUseCase,
         //IMenuItemUseCase menuItemUseCase,
         //IInventoryUseCase inventoryUseCase,
         ITransactionUseCase paymentUseCase)
     {
-        _orderUseCase = orderUseCase;
+        //_orderUseCase = orderUseCase;
         //_menuItemUseCase = menuItemUseCase;
         //_inventoryUseCase = inventoryUseCase;
         _paymentUseCase = paymentUseCase;

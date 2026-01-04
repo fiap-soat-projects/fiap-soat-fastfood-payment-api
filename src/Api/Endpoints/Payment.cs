@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Endpoints;
 
 [ApiController]
-[Route("/v1/order")]
-public class Transaction : ControllerBase
+[Route("/v1/payment")]
+public class Payment : ControllerBase
 {
-    private readonly IOrderController _orderController;
+    private readonly IPaymentController _orderController;
 
-    public Transaction(IOrderController orderController)
+    public Payment(IPaymentController orderController)
     {
         _orderController = orderController;
     }

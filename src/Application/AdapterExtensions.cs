@@ -23,7 +23,7 @@ public static class AdapterExtensions
     {
 
         return services
-         .AddSingleton<IOrderUseCase, OrderUseCase>()
+         //.AddSingleton<IOrderUseCase, OrderUseCase>()
          .AddSingleton<ITransactionUseCase, TransactionUseCase>();
          //.AddSingleton<ICustomerUseCase, CustomerUseCase>()
          //.AddSingleton<IInventoryUseCase, InventoryUseCase>()
@@ -34,7 +34,7 @@ public static class AdapterExtensions
     private static IServiceCollection RegisterControllers(this IServiceCollection services)
     {
         return services
-             .AddSingleton<IOrderController, OrderController>();
+             .AddSingleton<IPaymentController, PaymentController>();
              //.AddSingleton<ISelfOrderingController, SelfOrderingController>()
              //.AddSingleton<IMenuController, MenuController>();
     }
