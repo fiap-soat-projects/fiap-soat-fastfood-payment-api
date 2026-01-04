@@ -34,9 +34,9 @@ public static class InfrastructureExtensions
     public static IServiceCollection RegisterMongoDbRepositories(this IServiceCollection services)
     {
         services
-            .AddSingleton<IOrderMongoDbRepository, OrderMongoDbRepository>()
-            .AddSingleton<ICustomerMongoDbRepository, CustomerMongoDbRepository>()
-            .AddSingleton<IMenuItemMongoDbRepository, MenuItemMongoDbRepository>();
+            .AddSingleton<IOrderMongoDbRepository, OrderMongoDbRepository>();
+            //.AddSingleton<ICustomerMongoDbRepository, CustomerMongoDbRepository>()
+            //.AddSingleton<IMenuItemMongoDbRepository, MenuItemMongoDbRepository>();
 
         return services;
     }

@@ -10,7 +10,7 @@ namespace Api.HealthChecks;
 [ExcludeFromCodeCoverage]
 public class MongoDbHealthCheck : IHealthCheck
 {
-    internal const string HEALTH_CHECK_NAME = "fast-food-mongodb";
+    internal const string HEALTH_CHECK_NAME = "payment-mongodb";
 
     private readonly IMongoDatabase _mongoDatabase;
     private readonly Stopwatch _stopwatch;

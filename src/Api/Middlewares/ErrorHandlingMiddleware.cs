@@ -28,11 +28,11 @@ public class ErrorHandlingMiddleware
             await _next(context);
         }
         catch (Exception ex) when (ex
-            is CustomerNotFoundException
-            or MenuItemNotFoundException
-            or OrderNotFoundException
-            or DuplicatedItemException<Customer>
-            or DuplicatedItemException<MenuItem>)
+            //is CustomerNotFoundException
+            //or MenuItemNotFoundException
+            is OrderNotFoundException)
+            //or DuplicatedItemException<Customer>
+            //or DuplicatedItemException<MenuItem>)
         {
             _logger.LogWarning(ex, "{Message}", ex.Message);
 

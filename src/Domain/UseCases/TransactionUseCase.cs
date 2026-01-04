@@ -9,13 +9,15 @@ namespace Business.UseCases;
 internal class TransactionUseCase : ITransactionUseCase
 {
     private readonly IPixClient _pixClient;
-    private readonly ICustomerUseCase _customerUseCase;
+    //private readonly ICustomerUseCase _customerUseCase;
     private readonly IOrderRepository _orderRepository;
 
-    public TransactionUseCase(IPixClient pixClient, ICustomerUseCase customerUseCase, IOrderRepository orderRepository)
+    public TransactionUseCase(IPixClient pixClient, 
+        //ICustomerUseCase customerUseCase, 
+        IOrderRepository orderRepository)
     {
         _pixClient = pixClient;
-        _customerUseCase = customerUseCase;
+        //_customerUseCase = customerUseCase;
         _orderRepository = orderRepository;
     }
 
@@ -90,7 +92,7 @@ internal class TransactionUseCase : ITransactionUseCase
 
     private async Task<PaymentCheckout> ExecuteCustomerCheckoutAsync(Order order, PaymentMethod paymentMethod, CancellationToken cancellationToken)
     {
-        var customer = await _customerUseCase.GetByIdAsync(order!.CustomerId!, cancellationToken);
+        Customer customer = null; //await _customerUseCase.GetByIdAsync(order!.CustomerId!, cancellationToken);
 
         var checkoutInput = new CheckoutInput
         (

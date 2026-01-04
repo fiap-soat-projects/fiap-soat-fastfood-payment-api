@@ -7,7 +7,7 @@ namespace Api.HealthChecks;
 [ExcludeFromCodeCoverage]
 public class ApplicationHealthCheck : IHealthCheck
 {
-    internal const string HEALTH_CHECK_NAME = "fast-food-api";
+    internal const string HEALTH_CHECK_NAME = "payment-api";
 
     private readonly Stopwatch _stopwatch = new();
 
