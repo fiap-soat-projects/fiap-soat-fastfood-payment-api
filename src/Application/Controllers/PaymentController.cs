@@ -6,7 +6,7 @@ using Business.UseCases.Interfaces;
 
 namespace Adapter.Controllers;
 
-internal class PaymentController : IPaymentController
+public class PaymentController : IPaymentController
 {
     private readonly IPaymentUseCase _paymentUseCase;
 
