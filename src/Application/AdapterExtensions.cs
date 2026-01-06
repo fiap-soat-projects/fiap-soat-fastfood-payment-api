@@ -1,14 +1,13 @@
 ﻿using Adapter.Controllers;
 using Adapter.Controllers.Interfaces;
-//using Adapter.Gateways.Logger;
 using Adapter.Gateways.Repositories;
-//using Business.Gateways.Loggers.Interfaces;
 using Business.Gateways.Repositories.Interfaces;
 using Business.UseCases;
 using Business.UseCases.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Adapter;
+
 public static class AdapterExtensions
 {
     public static IServiceCollection InjectAdapterDependencies(this IServiceCollection services)
@@ -23,11 +22,7 @@ public static class AdapterExtensions
     {
 
         return services
-         //.AddSingleton<IOrderUseCase, OrderUseCase>()
-         .AddSingleton<ITransactionUseCase, TransactionUseCase>();
-         //.AddSingleton<ICustomerUseCase, CustomerUseCase>()
-         //.AddSingleton<IInventoryUseCase, InventoryUseCase>()
-         //.AddSingleton<IMenuItemUseCase, MenuItemUseCase>();
+         .AddSingleton<IPaymentUseCase, PaymentUseCase>();
 
     }
 
@@ -35,18 +30,12 @@ public static class AdapterExtensions
     {
         return services
              .AddSingleton<IPaymentController, PaymentController>();
-             //.AddSingleton<ISelfOrderingController, SelfOrderingController>()
-             //.AddSingleton<IMenuController, MenuController>();
     }
 
     public static IServiceCollection RegisterGateways(this IServiceCollection services)
     {
-        services
-            //.AddSingleton<IInventoryLogger, InventoryLoggerGateway>()
-            .AddSingleton<IOrderRepository, OrderGateway>();
-            //.AddSingleton<ICustomerRepository, CustomerGateway>()
-            //.AddSingleton<IMenuItemRepository, MenuItemGateway>();
+        return services
+            .AddSingleton<IPaymentRepository, PaymentGateway>();
 
-        return services;
     }
 }

@@ -1,5 +1,4 @@
-﻿using Business.Entities;
-using Business.Exceptions;
+﻿using Business.Exceptions;
 using System.Net;
 using System.Text.Json;
 
@@ -28,11 +27,7 @@ public class ErrorHandlingMiddleware
             await _next(context);
         }
         catch (Exception ex) when (ex
-            //is CustomerNotFoundException
-            //or MenuItemNotFoundException
-            is OrderNotFoundException)
-            //or DuplicatedItemException<Customer>
-            //or DuplicatedItemException<MenuItem>)
+            is PaymentNotFoundException)
         {
             _logger.LogWarning(ex, "{Message}", ex.Message);
 

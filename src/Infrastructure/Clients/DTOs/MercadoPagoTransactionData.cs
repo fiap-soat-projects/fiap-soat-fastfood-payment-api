@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Clients.DTOs;
 
-internal class MercadoPagoTransactionData
+public class MercadoPagoTransactionData
 {
     [JsonPropertyName("qr_code")]
     public string? QrCode { get; init; }

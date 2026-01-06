@@ -1,5 +1,4 @@
 ﻿using Business.Entities;
-using Business.Entities.Enums;
 using Business.Gateways.Clients.DTOs;
 using Business.Gateways.Clients.Interfaces;
 using Infrastructure.Clients.DTOs;
@@ -10,7 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace Infrastructure.Clients;
 
-public class MercadoPagoGateway : IPixClient
+public class MercadoPagoGateway : IMercadoPagoClient
 {
     private readonly HttpClient _httpClient;
     private readonly ILogger<MercadoPagoGateway> _logger;
@@ -27,9 +26,8 @@ public class MercadoPagoGateway : IPixClient
         _logger = logger;
     }
 
-    public async Task<PaymentCheckout> CreatePaymentAsync(
-        CheckoutInput input,
-        PaymentMethod paymentMethod,
+    public async Task<PaymentResult> CreatePaymentAsync(
+        PaymentInput input,
         CancellationToken cancellationToken)
     {
         const string CREATE_PAYMENT_PATH_TEMPLATE = "/v1/payments";
@@ -38,7 +36,7 @@ public class MercadoPagoGateway : IPixClient
         var request = new HttpRequestMessage(HttpMethod.Post, CREATE_PAYMENT_PATH_TEMPLATE)
         {
             Headers = { { IDEMPOTENCY_KEY, input.OrderId } },
-            Content = CreateContent(input, paymentMethod)
+            Content = CreateContent(input)
         };
 
         var response = await _httpClient.SendAsync(request, cancellationToken);
@@ -61,14 +59,14 @@ public class MercadoPagoGateway : IPixClient
 
     }
 
-    private static StringContent CreateContent(CheckoutInput input, PaymentMethod paymentMethod)
+    private static StringContent CreateContent(PaymentInput input)
     {
         const string CONTENT_TYPE = "application/json";
 
         var requestContent = new MercadoPagoPaymentRequest
         {
             TransactionAmount = input.TotalPrice,
-            PaymentMethodId = paymentMethod.ToString().ToLower(),
+            PaymentMethodId = input.PaymentMethod.ToString().ToLower(),
             Metadata = new MercadoPagoMetadata
             {
                 OrderNumber = input.OrderId

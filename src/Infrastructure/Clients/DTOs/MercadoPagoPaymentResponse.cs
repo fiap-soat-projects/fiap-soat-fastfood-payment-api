@@ -1,11 +1,13 @@
 ﻿using Business.Entities;
+using Business.Entities.Enums;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Infrastructure.Clients.DTOs;
 
 [ExcludeFromCodeCoverage]
-internal class MercadoPagoPaymentResponse
+public class MercadoPagoPaymentResponse
 {
     [JsonPropertyName("id")]
     public long Id { get; init; }
@@ -25,15 +27,16 @@ internal class MercadoPagoPaymentResponse
     [JsonPropertyName("point_of_interaction")]
     public MercadoPagoPointOfInteraction? PointOfInteraction { get; init; }
 
-    internal PaymentCheckout ToDomain()
+    internal PaymentResult ToDomain()
     {
-        var orderPaymentCheckout = new PaymentCheckout
-        {
-            Id = Id,
+        var orderPaymentCheckout = new PaymentResult
+        {            
             PaymentMethod = PaymentMethodId!,
+            PaymentStatus = PaymentStatus.Pending.ToString(),
             QrCode = PointOfInteraction?.TransactionData?.QrCode!,
             QrCodeBase64 = PointOfInteraction?.TransactionData?.QrCodeBase64!,
             Amount = TransactionAmount,
+            PaymentResponse = JsonSerializer.Serialize(this)
         };
 
         return orderPaymentCheckout;

@@ -34,9 +34,7 @@ public static class InfrastructureExtensions
     public static IServiceCollection RegisterMongoDbRepositories(this IServiceCollection services)
     {
         services
-            .AddSingleton<IOrderMongoDbRepository, OrderMongoDbRepository>();
-            //.AddSingleton<ICustomerMongoDbRepository, CustomerMongoDbRepository>()
-            //.AddSingleton<IMenuItemMongoDbRepository, MenuItemMongoDbRepository>();
+            .AddSingleton<IPaymentMongoDbRepository, PaymentMongoDbRepository>();
 
         return services;
     }
@@ -72,7 +70,7 @@ public static class InfrastructureExtensions
         var mercadoPagoApiToken = Environment.GetEnvironmentVariable(MERCADO_PAGO_API_TOKEN_KEY);
         EnvironmentVariableNotFoundException.ThrowIfIsNullOrWhiteSpace(mercadoPagoApiToken, MERCADO_PAGO_API_TOKEN_KEY);
 
-        services.AddHttpClient<IPixClient, MercadoPagoGateway>(client =>
+        services.AddHttpClient<IMercadoPagoClient, MercadoPagoGateway>(client =>
         {
             client.BaseAddress = new Uri(mercadoPagoApiUrl!);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", mercadoPagoApiToken);

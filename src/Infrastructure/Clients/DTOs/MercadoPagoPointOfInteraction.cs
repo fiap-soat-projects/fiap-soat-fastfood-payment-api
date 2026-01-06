@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Clients.DTOs;
 
-internal class MercadoPagoPointOfInteraction
+public class MercadoPagoPointOfInteraction
 {
     [JsonPropertyName("transaction_data")]
     public MercadoPagoTransactionData? TransactionData { get; init; }

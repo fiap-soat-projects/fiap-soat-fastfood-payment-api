@@ -8,37 +8,35 @@ namespace Api.Endpoints;
 [Route("/v1/payment")]
 public class Payment : ControllerBase
 {
-    private readonly IPaymentController _orderController;
+    private readonly IPaymentController _paymentController;
 
-    public Payment(IPaymentController orderController)
+    public Payment(IPaymentController paymentController)
     {
-        _orderController = orderController;
+        _paymentController = paymentController;
     }
 
-    [HttpPost("checkout")]
-    public async Task<IActionResult> CheckoutAsync(
-        [FromBody] CheckoutRequest checkoutRequest,
+    [HttpPost("create")]
+    public async Task<IActionResult> CreateAsync(
+        [FromBody] PaymentRequest paymentRequest,
         CancellationToken cancellationToken)
     {
-        var presenter = await _orderController.CheckoutAsync(checkoutRequest, cancellationToken);
+        var presenter = await _paymentController.CreateAsync(paymentRequest, cancellationToken);
+        return Ok(presenter.ViewModel);
+    }
 
+    [HttpGet("{id:length(24)}")]
+    public async Task<IActionResult> GetAsync(string id, CancellationToken cancellationToken)
+    {
+        var presenter = await _paymentController.GetAsync(id, cancellationToken);
         return Ok(presenter.ViewModel);
     }
 
     [HttpPost("{id:length(24)}/confirm-payment")]
-    public async Task<IActionResult> ConfirmPaymentAsync(string id, CancellationToken cancellationToken)
+    public async Task<IActionResult> ConfirmAsync(string id, CancellationToken cancellationToken)
     {
-        await _orderController.ConfirmPaymentAsync(id, cancellationToken);
-
+        await _paymentController.ConfirmAsync(id, cancellationToken);
         return NoContent();
     }
 
 
-    [HttpPost("payment/webhook")]
-    public async Task<IActionResult> PaymentWebhookAsync([FromBody] PaymentWebhook webhook, CancellationToken cancellationToken)
-    {
-        await _orderController.ProcessPaymentAsync(webhook, cancellationToken);
-
-        return NoContent();
-    }
 }
