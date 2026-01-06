@@ -6,7 +6,6 @@ using System.Text.Json.Serialization;
 
 namespace Infrastructure.Clients.DTOs;
 
-[ExcludeFromCodeCoverage]
 public class MercadoPagoPaymentResponse
 {
     [JsonPropertyName("id")]

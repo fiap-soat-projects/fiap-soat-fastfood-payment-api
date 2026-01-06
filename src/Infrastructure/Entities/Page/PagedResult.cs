@@ -2,7 +2,6 @@
 
 namespace Infrastructure.Entities.Page;
 
-[ExcludeFromCodeCoverage]
 public class PagedResult<T>
 {
     public int Page { get; set; }

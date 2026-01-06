@@ -6,7 +6,6 @@ using System.Text.Json.Serialization;
 
 namespace Api.HealthChecks.Writers;
 
-[ExcludeFromCodeCoverage]
 public static class HealthCheckResponseWriter
 {
     private static readonly JsonSerializerOptions _jsonSerializerOptions = new()

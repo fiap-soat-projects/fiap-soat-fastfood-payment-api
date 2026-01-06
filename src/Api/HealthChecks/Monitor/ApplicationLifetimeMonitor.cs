@@ -2,7 +2,6 @@
 
 namespace Api.HealthChecks.Monitor;
 
-[ExcludeFromCodeCoverage]
 internal static class ApplicationLifetimeMonitor
 {
     public static DateTime StartDate { get; }

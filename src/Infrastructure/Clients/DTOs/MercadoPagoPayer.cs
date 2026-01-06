@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace Infrastructure.Clients.DTOs;
 
-[ExcludeFromCodeCoverage]
 internal class MercadoPagoPayer
 {
     [JsonPropertyName("first_name")]

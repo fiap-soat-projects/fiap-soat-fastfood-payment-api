@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure.MongoDb.Options;
 
-[ExcludeFromCodeCoverage]
 internal static class MongoGlobalOptions
 {
     const string GLOBAL_CONVENTIONS_NAME = "Global Conventions";

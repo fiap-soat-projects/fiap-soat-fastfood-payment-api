@@ -1,8 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace Infrastructure.Exceptions;
 
-namespace Infrastructure.Exceptions;
 
-[ExcludeFromCodeCoverage]
 public class EnvironmentVariableNotFoundException : InfrastructureException
 {
     public EnvironmentVariableNotFoundException(string? message) : base(message)

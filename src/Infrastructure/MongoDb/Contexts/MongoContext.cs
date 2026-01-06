@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure.MongoDb.Contexts;
 
-[ExcludeFromCodeCoverage]
 internal class MongoContext : IMongoContext
 {
     public string ClusterName { get; }

@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure.Entities;
 
-[ExcludeFromCodeCoverage]
 internal abstract class MongoEntity : IMongoEntity
 {
     [BsonRepresentation(BsonType.ObjectId)]

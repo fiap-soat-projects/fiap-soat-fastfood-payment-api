@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Api.HealthChecks;
 
-[ExcludeFromCodeCoverage]
 public class ApplicationHealthCheck : IHealthCheck
 {
     internal const string HEALTH_CHECK_NAME = "payment-api";

@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Api.HealthChecks.DTOs;
 
-[ExcludeFromCodeCoverage]
 public record HealthCheckResponse
 {
     public string ServerName { get; init; }

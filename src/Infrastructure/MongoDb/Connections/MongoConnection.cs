@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure.MongoDb.Connections;
 
-[ExcludeFromCodeCoverage]
 internal class MongoConnection : IMongoConnection
 {
     public string? AppName { get; private set; }
