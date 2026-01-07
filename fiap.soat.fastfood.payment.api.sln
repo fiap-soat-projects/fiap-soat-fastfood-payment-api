@@ -35,6 +35,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter.Tests", "tests\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Tests", "tests\UnitTests\Business.Tests\Business.Tests.csproj", "{2BBCFC91-B2F0-6CDE-8427-B593F1152072}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{1609BF96-3BD1-4074-AC64-7058689873BB}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\fastfood-api-configmap.yaml = k8s\fastfood-api-configmap.yaml
+		k8s\fastfood-api-deployment.yaml = k8s\fastfood-api-deployment.yaml
+		k8s\fastfood-api-hpa.yaml = k8s\fastfood-api-hpa.yaml
+		k8s\fastfood-api-service.yaml = k8s\fastfood-api-service.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{ACE6DE2D-B3AC-420B-B43D-C1380807C8B0}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\github-actions.yml = .github\workflows\github-actions.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +91,8 @@ Global
 		{0B11CF59-D435-47E3-A014-7C0A587BE32E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{F91A7BA6-A48A-4342-93B8-BF7E69671CD0} = {6CD282BB-7759-43DD-BBDA-C0A5E29F1E05}
 		{2BBCFC91-B2F0-6CDE-8427-B593F1152072} = {6CD282BB-7759-43DD-BBDA-C0A5E29F1E05}
+		{1609BF96-3BD1-4074-AC64-7058689873BB} = {53C57D7B-F25E-4F9F-B58C-CACBD97C1F03}
+		{ACE6DE2D-B3AC-420B-B43D-C1380807C8B0} = {48B356B8-D7F2-459A-8934-1C78D85E490C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FBC4EAE-604E-4437-A6BE-CA788CCBF395}
