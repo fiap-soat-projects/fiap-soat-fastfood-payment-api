@@ -1,7 +1,9 @@
 ﻿using Business.Entities.Interfaces;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Business.Exceptions;
 
+[ExcludeFromCodeCoverage]
 public class EntityNotFoundException<TEntity> : DomainException where TEntity : IAggregateRoot
 {
     private static readonly string _entityClassName = typeof(TEntity).Name;
