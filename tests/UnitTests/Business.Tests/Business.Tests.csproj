@@ -19,10 +19,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Domain\Business.csproj" />
+    <ProjectReference Include="..\..\..\src\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Entities\" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@ using Business.UseCases.Interfaces;
 
 namespace Business.UseCases;
 
-internal class PaymentUseCase : IPaymentUseCase
+public class PaymentUseCase : IPaymentUseCase
 {
     private readonly IMercadoPagoClient _mercadoPagoClient;
     private readonly IPaymentRepository _paymentRepository;
