@@ -1,0 +1,27 @@
+# PaymentController
+
+POST {{Api_HostAddress}}/payment/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "paymentMethod": "Pix",
+  "orderId" : "4323",
+  "customerId" : "645646",
+  "customerName" : "teste Jamison 5",
+  "customerEmail" : "gomesteste@jgomesteste.com",
+  "totalPrice" : 15.99
+}
+
+###
+
+POST {{Api_HostAddress}}/payment/{{id}}/confirm-payment
+Accept: application/json
+
+###
+
+
+GET {{Api_HostAddress}}/payment/{{id}}
+Accept: application/json
+
+###
