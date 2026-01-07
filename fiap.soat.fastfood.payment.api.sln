@@ -37,10 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Tests", "tests\Uni
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{1609BF96-3BD1-4074-AC64-7058689873BB}"
 	ProjectSection(SolutionItems) = preProject
-		k8s\fastfood-api-configmap.yaml = k8s\fastfood-api-configmap.yaml
-		k8s\fastfood-api-deployment.yaml = k8s\fastfood-api-deployment.yaml
-		k8s\fastfood-api-hpa.yaml = k8s\fastfood-api-hpa.yaml
-		k8s\fastfood-api-service.yaml = k8s\fastfood-api-service.yaml
+		k8s\fastfood-payment-api-configmap.yaml = k8s\fastfood-payment-api-configmap.yaml
+		k8s\fastfood-payment-api-hpa.yaml = k8s\fastfood-payment-api-hpa.yaml
+		k8s\fastfood-payment-api-deployment.yaml = k8s\fastfood-payment-api-deployment.yaml
+		k8s\fastfood-payment-api-service.yaml = k8s\fastfood-payment-api-service.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{ACE6DE2D-B3AC-420B-B43D-C1380807C8B0}"
