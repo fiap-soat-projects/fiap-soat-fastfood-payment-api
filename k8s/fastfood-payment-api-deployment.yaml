@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fastfood-api
+  name: fastfood-payment-api
   namespace: fiap
   labels:
-    app: fastfood-api
+    app: fastfood-payment-api
 spec:
   selector:
     matchLabels:
-      app: fastfood-api
+      app: fastfood-payment-api
   template:
     metadata:
       labels:
-        app: fastfood-api
+        app: fastfood-payment-api
     spec:
       containers:
-        - name: fastfood-api
-          image: ajjposproj/fiap-soat-fastfood-api:latest
+        - name: fastfood-payment-api
+          image: ajjposproj/fiap-soat-fastfood-payment-api:latest
           imagePullPolicy: IfNotPresent
           startupProbe:
             httpGet:
@@ -49,13 +49,13 @@ spec:
                   fieldPath: metadata.name
           envFrom:
             - configMapRef:
-                name: fastfood-api
+                name: fastfood-payment-api
             - secretRef:
-                name: fastfood-api
+                name: fastfood-payment-api
           resources:
             requests:
-              cpu: "100m"
-              memory: "256Mi"
+              cpu: "50m"
+              memory: "128Mi"
             limits:
               cpu: "200m"
               memory: "512Mi"
