@@ -1,7 +1,9 @@
 ﻿using Business.Entities.Enums;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Business.UseCases.Exceptions;
 
+[ExcludeFromCodeCoverage]
 internal class PaymentStatusNotSupportedException : Exception
 {
     private const string DEFAULT_MESSAGE = "Payment status '{0}' not supported.";
