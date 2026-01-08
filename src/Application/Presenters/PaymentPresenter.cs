@@ -1,7 +1,10 @@
 ﻿using Adapter.Presenters.DTOs;
 using Business.Entities;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Adapter.Presenters;
+
+[ExcludeFromCodeCoverage]
 public class PaymentPresenter
 {
     public PaymentResponse ViewModel { get; init; }
