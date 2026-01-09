@@ -43,7 +43,9 @@ public class MercadoPagoGateway : IMercadoPagoClient
 
         //var response = await _httpClient.SendAsync(request, cancellationToken);             
         
-        var response = await _httpClient.GetAsync(BASE_URL_MOCK, cancellationToken);
+        using var httpClient = new HttpClient();
+
+        var response = await httpClient.GetAsync(BASE_URL_MOCK, cancellationToken);
         var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
 
         if (response.IsSuccessStatusCode is false)
