@@ -3,7 +3,6 @@ using Business.Gateways.Clients.DTOs;
 using Business.Gateways.Clients.Interfaces;
 using Infrastructure.Clients.DTOs;
 using Microsoft.Extensions.Logging;
-using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -13,8 +12,7 @@ namespace Infrastructure.Clients;
 public class MercadoPagoGateway : IMercadoPagoClient
 {
     private readonly HttpClient _httpClient;
-    private readonly ILogger<MercadoPagoGateway> _logger; 
-    private const string BASE_URL_MOCK = "https://webhook.site/942f0c97-2b54-4896-830f-7e61052afdde";
+    private readonly ILogger<MercadoPagoGateway> _logger;
 
     private static readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
@@ -35,15 +33,14 @@ public class MercadoPagoGateway : IMercadoPagoClient
         const string CREATE_PAYMENT_PATH_TEMPLATE = "/v1/payments";
         const string IDEMPOTENCY_KEY = "X-Idempotency-Key";
 
-        //var request = new HttpRequestMessage(HttpMethod.Post, CREATE_PAYMENT_PATH_TEMPLATE)
-        //{
-        //    Headers = { { IDEMPOTENCY_KEY, input.OrderId } },
-        //    Content = CreateContent(input)
-        //};      
+        var request = new HttpRequestMessage(HttpMethod.Post, CREATE_PAYMENT_PATH_TEMPLATE)
+        {
+            Headers = { { IDEMPOTENCY_KEY, input.OrderId } },
+            Content = CreateContent(input)
+        };
 
-        //var response = await _httpClient.SendAsync(request, cancellationToken);             
-        
-        var response = await _httpClient.GetAsync(BASE_URL_MOCK, cancellationToken);
+        var response = await _httpClient.SendAsync(request, cancellationToken);
+
         var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
 
         if (response.IsSuccessStatusCode is false)
