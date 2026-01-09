@@ -14,7 +14,6 @@ A API presente neste repositório disponibiliza rotas para gerenciamento de paga
 
 Para mais detalhes sobre a linguagem do domínio, consulte [`docs/ubiquitous-language.md`](docs/ubiquitous-language.md).
 
-
 ## 👨‍💻 Tecnologias Utilizadas
 
 - **.NET 8** (C# 12)
@@ -57,6 +56,12 @@ A API e seus recursos estão disponíveis em:
 
 - Todos os endpoints aceitam e retornam JSON.
 - Utilize o Swagger para explorar e testar os endpoints.
+
+## Análise de código e testes
+
+![Sonar](./assets/sonar.png)
+
+![Testes de unidade e comportamento](./assets/tests.png)
 
 ## 🏦 Banco de Dados
 
